@@ -47,7 +47,7 @@ unsigned long getNtpTime() {
 }
 
 
-void write_595_time(){
+void write_595_time(uint8_t hours, uint8_t minutes){
     /*
        Shift register bit meanings:
 
@@ -88,11 +88,6 @@ void write_595_time(){
     2, 128 :  NC
     */
 
-    unsigned long time;
-    time = (millis()/1000) + millis_offset;
-    time = time % (60L * 60L * 24L);
-    unsigned hours = (time / 60 / 60) % 24;
-    unsigned minutes = (time / 60) % 60;
 
     uint8_t out[] = { 0, 0, 0, 0 };
 
@@ -192,8 +187,17 @@ void loop(){
     // Update the readout every ten seconds
     if (lastDisplayUpdate + update_display_interval < millis()){
         lastDisplayUpdate = millis();
+
+        // Get the hours & minutes
+        unsigned long time;
+        time = (millis()/1000) + millis_offset;
+        time = time % (60L * 60L * 24L);
+        uint8_t hours = (time / 60 / 60) % 24;
+        uint8_t minutes = (time / 60) % 60;
+
+        // Print the time
         print_time();
-        write_595_time();
+        write_595_time(hours, minutes);
     }
 }
 
