@@ -94,8 +94,8 @@ void write_595_time(uint8_t hours, uint8_t minutes){
     // Hour tens
     switch (hours / 10){
         case 0: out[0] |= 0x01; break;
-        case 1: out[0] |= 0x02; break;
-        case 2: out[0] |= 0x04; break;
+        case 1: out[0] |= 0x04; break;
+        case 2: out[0] |= 0x02; break;
     }
 
     // Hour ones
@@ -116,7 +116,7 @@ void write_595_time(uint8_t hours, uint8_t minutes){
     switch (minutes / 10){
         case 0: out[1] |= 0x40; break;
         case 5: out[1] |= 0x80; break;
-        case 4: out[1] |= 0x01; break;
+        case 4: out[2] |= 0x01; break;
         case 3: out[2] |= 0x02; break;
         case 2: out[2] |= 0x04; break;
         case 1: out[2] |= 0x08; break;
