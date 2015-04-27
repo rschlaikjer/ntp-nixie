@@ -2,12 +2,12 @@ EAGLE AutoRouter Statistics:
 
 Job           : /home/ross/eagle/Nixie/displayboard.brd
 
-Start at      : 00:10:28 (3/26/15)
-End at        : 00:10:28 (3/26/15)
+Start at      : 15:51:31 (4/18/15)
+End at        : 15:51:31 (4/18/15)
 Elapsed time  : 00:00:00
 
 Signals       :    73   RoutingGrid: 50 mil  Layers: 2
-Connections   :   126   predefined:  125 ( 23 Vias )
+Connections   :   126   predefined:  123 ( 22 Vias )
 
 Router memory :   23936
 
@@ -18,8 +18,8 @@ Number of Ripups  :         0         0         0         0         0
 max. Level        :         0         0         0         0         0
 max. Total        :         0         0         0         0         0
 
-Routed            :         1         1         1         1         1
-Vias              :         1         0         0         0         0
+Routed            :         3         3         3         3         3
+Vias              :         2         0         0         0         0
 Resolution        :   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %
 
 Final             : 100.0% finished
