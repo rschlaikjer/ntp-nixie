@@ -8,6 +8,8 @@
 #define N_SCL 4
 #define N_G   6
 
+#define HV_SHDN 7
+
 // Timezone: US East
 TimeChangeRule usEDT = {"EDT", Second, Sun, Mar, 2, -240};  //UTC - 4 hours
 TimeChangeRule usEST = {"EST", First, Sun, Nov, 2, -300};   //UTC - 5 hours
@@ -204,6 +206,10 @@ void loop(){
 void setup(){
     Serial.begin(19200);
 
+    // HV Control pin, start with shutdown high
+    pinMode(HV_SHDN, OUTPUT);
+    digitalWrite(HV_SHDN, HIGH);
+
     // Shift register setup
     pinMode(N_SER, OUTPUT);
     pinMode(N_SCK, OUTPUT);
@@ -231,4 +237,7 @@ void setup(){
 
     // Get an initial NTP offset
     update_offset();
+
+    // Enable the HV system
+    digitalWrite(HV_SHDN, LOW);
 }
