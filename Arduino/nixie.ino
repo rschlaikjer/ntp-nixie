@@ -34,11 +34,24 @@ unsigned long update_display_interval = 1000L * 5L; // 5 seconds
 uint32_t lastDisplayUpdate = 0;
 uint32_t timeLong;
 
-unsigned long getNtpTime() {
+// Function prototypes
+void write_595_time(uint8_t hours, uint8_t minutes);
+
+unsigned long getNtpTime(bool idle_anim) {
     unsigned long timeFromNTP;
     const unsigned long seventy_years = 2208988800UL;
     ether.ntpRequest(ntp_srv, clientPort);
+
+    int hours = 0;
+    int minutes = 0;
+    unsigned long idle_tick = 0;
     while(true){
+        if (idle_anim && (millis() - idle_tick > 250)){
+            idle_tick = millis();
+            write_595_time(hours, minutes);
+            hours = (hours + 1) % 24;
+            minutes = (minutes + 1) % 60;
+        }
         word length = ether.packetReceive();
         ether.packetLoop(length);
         if(length > 0 && ether.ntpProcessAnswer(&timeFromNTP, clientPort)) {
@@ -170,8 +183,8 @@ void print_time(){
     Serial.println(seconds);
 }
 
-void update_offset(){
-    unsigned long time = getNtpTime();
+void update_offset(bool idle_anim){
+    unsigned long time = getNtpTime(idle_anim);
     if (time){
         millis_offset = (time - (millis()/1000));
     }
@@ -183,7 +196,7 @@ void loop(){
     // Update the NTP offset each hour
     if(lastUpdate +  update_interval < millis()) {
         lastUpdate = millis();
-        update_offset();
+        update_offset(false);
     }
 
     // Update the readout every ten seconds
@@ -235,9 +248,9 @@ void setup(){
     lastUpdate = millis();
     Serial.println("Setup done");
 
-    // Get an initial NTP offset
-    update_offset();
-
     // Enable the HV system
     digitalWrite(HV_SHDN, LOW);
+
+    // Get an initial NTP offset
+    update_offset(true);
 }
