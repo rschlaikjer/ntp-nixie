@@ -35,7 +35,7 @@ uint32_t lastDisplayUpdate = 0;
 uint32_t timeLong;
 
 // Function prototypes
-void write_595_time(uint8_t hours, uint8_t minutes);
+void write_595_time(uint8_t hours, uint8_t minutes, bool dp);
 
 unsigned long getNtpTime(bool idle_anim) {
     unsigned long timeFromNTP;
@@ -48,7 +48,7 @@ unsigned long getNtpTime(bool idle_anim) {
     while(true){
         if (idle_anim && (millis() - idle_tick > 250)){
             idle_tick = millis();
-            write_595_time(hours, minutes);
+            write_595_time(hours, minutes, false);
             hours = (hours + 1) % 24;
             minutes = (minutes + 1) % 60;
         }
@@ -62,7 +62,7 @@ unsigned long getNtpTime(bool idle_anim) {
 }
 
 
-void write_595_time(uint8_t hours, uint8_t minutes){
+void write_595_time(uint8_t hours, uint8_t minutes, bool dp){
     /*
        Shift register bit meanings:
 
@@ -151,6 +151,11 @@ void write_595_time(uint8_t hours, uint8_t minutes){
         case 1: out[3] |= 0x20; break;
     }
 
+    if (dp){
+        out[1] |= 0x20;
+        out[3] |= 0x40;
+    }
+
     Serial.print("Bit data: ");
     Serial.print(out[0], BIN);
     Serial.print(" ");
@@ -190,6 +195,7 @@ void update_offset(bool idle_anim){
     }
 }
 
+bool dp = true;
 void loop(){
     ether.packetLoop(ether.packetReceive());
 
@@ -212,7 +218,8 @@ void loop(){
 
         // Print the time
         print_time();
-        write_595_time(hours, minutes);
+        write_595_time(hours, minutes, dp);
+        dp = !dp;
     }
 }
 
