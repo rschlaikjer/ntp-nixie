@@ -16,14 +16,14 @@ TimeChangeRule usEST = {"EST", First, Sun, Nov, 2, -300};   //UTC - 5 hours
 Timezone usEastern(usEDT, usEST);
 
 // Ethernet
-byte mac[] = {0xDE, 0xAD, 0xBE, 0xEF, 0xBA, 0xBE};
-byte myip[] = { 192, 168, 0, 6 };
-byte gwip[] = { 192, 168, 0, 1 };
+byte mac[] = {0xDE, 0xAD, 0xBE, 0xEF, 0xBA, 0xB1};
 #define BUFFER_SIZE 800
 byte Ethernet::buffer[BUFFER_SIZE];
 
 // NTP
-uint8_t ntp_srv[] = {192, 168,   0,   1};
+const char ntp_servname[] PROGMEM = "0.pool.ntp.org";
+//uint8_t ntp_srv[] = {129,  6,   15,   29};
+
 unsigned long millis_offset = 0;
 uint8_t clientPort = 123;
 
@@ -40,7 +40,13 @@ void write_595_time(uint8_t hours, uint8_t minutes, bool dp);
 unsigned long getNtpTime(bool idle_anim) {
     unsigned long timeFromNTP;
     const unsigned long seventy_years = 2208988800UL;
-    ether.ntpRequest(ntp_srv, clientPort);
+
+    if (!ether.dnsLookup(ntp_servname)){
+        Serial.println("DNS lookup failed");
+        return 0;
+    }
+
+    ether.ntpRequest(ether.hisip, clientPort);
 
     int hours = 0;
     int minutes = 0;
@@ -246,10 +252,14 @@ void setup(){
         while (1);
     }
 
-    Serial.print("Static setup...");
-    ether.staticSetup(myip, gwip, gwip);
-    static byte dnsip[] = {8,8,8,8};
-    ether.copyIp(ether.dnsip, dnsip);
+    Serial.print("DHCP...");
+    //ether.staticSetup(myip, gwip, gwip);
+    //static byte dnsip[] = {8,8,8,8};
+    //ether.copyIp(ether.dnsip, dnsip);
+    if (!ether.dhcpSetup()){
+        Serial.println(" failed.");
+        while(1);
+    }
     Serial.println("done.");
 
     lastUpdate = millis();
