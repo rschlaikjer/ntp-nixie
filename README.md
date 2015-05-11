@@ -45,7 +45,6 @@ and one display (shift registers, high voltage transistors).
 
 ## Pretty pictures
 
-![Active](/Pics/active.jpg?raw=true "It's alive")
-![Display](/Pics/disp-front.jpg?raw=true "Forward display")
-![Display Logic](/Pics/disp-back.jpg?raw=true "Display logic")
-![Logic](/Pics/logic.jpg?raw=true "Logic board")
+![Pretty](/Pics/showcase.jpg?raw=true "It's alive")
+![Logic](/Pics/logic.jpg?raw=true "Forward display")
+![Display Logic](/Pics/display.jpg?raw=true "Display logic")
