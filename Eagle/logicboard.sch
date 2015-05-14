@@ -15957,9 +15957,14 @@ Source: 008-0260-0_E.pdf</description>
 <approved hash="104,1,193.04,111.76,U2,VSSOSC,GND,,,"/>
 <approved hash="104,1,193.04,154.94,U2,VDDOSC,3.3V,,,"/>
 <approved hash="104,1,195.58,154.94,U2,VDD,3.3V,,,"/>
+<approved hash="104,1,233.68,198.12,U$2,+VDC,12V,,,"/>
 <approved hash="202,1,198.12,187.96,U$2,CP1,,,,"/>
 <approved hash="202,1,198.12,182.88,U$2,CP2,,,,"/>
+<approved hash="110,1,215.9,22.86,N$8,SHDN,,,,"/>
+<approved hash="111,1,215.9,22.86,N$8,,,,,"/>
 <approved hash="113,1,46.5074,208.475,FTDI,,,,,"/>
+<approved hash="113,1,111.083,217.365,JP2,,,,,"/>
+<approved hash="113,1,278.659,208.28,Q1,,,,,"/>
 </errors>
 </schematic>
 </drawing>

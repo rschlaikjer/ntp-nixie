@@ -1,25 +1,25 @@
 EAGLE AutoRouter Statistics:
 
-Job           : /home/ross/eagle/Nixie/logicboard.brd
+Job           : /home/ross/Programming/Github/nixie-ntp/Eagle/logicboard.brd
 
-Start at      : 17:37:22 (3/25/15)
-End at        : 17:37:22 (3/25/15)
+Start at      : 20:47:18 (5/13/15)
+End at        : 20:47:18 (5/13/15)
 Elapsed time  : 00:00:00
 
-Signals       :    36   RoutingGrid: 50 mil  Layers: 2
-Connections   :    82   predefined:  82 ( 20 Vias )
+Signals       :    47   RoutingGrid: 50 mil  Layers: 2
+Connections   :   122   predefined:  113 ( 58 Vias )
 
-Router memory :   19008
+Router memory :   19360
 
-Passname          :     Route Optimize1 Optimize2 Optimize3 Optimize4
+Passname          :    Busses     Route Optimize1 Optimize2 Optimize3 Optimize4
 
-Time per pass     :  00:00:00  00:00:00  00:00:00  00:00:00  00:00:00
-Number of Ripups  :         0         0         0         0         0
-max. Level        :         0         0         0         0         0
-max. Total        :         0         0         0         0         0
+Time per pass     :  00:00:00  00:00:00  00:00:00  00:00:00  00:00:00  00:00:00
+Number of Ripups  :         0         0         0         0         0         0
+max. Level        :         0         0         0         0         0         0
+max. Total        :         0         0         0         0         0         0
 
-Routed            :         0         0         0         0         0
-Vias              :         0         0         0         0         0
-Resolution        :   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %
+Routed            :         1         9         9         9         9         9
+Vias              :         0         9         0         0         0         0
+Resolution        :    93.4 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %
 
-Final             : 100.0% finished
+Final             : 98.4% finished. Polygons may have fallen apart.
